@@ -1,0 +1,37 @@
+( ============================================================================ )
+( CNC TOOLPATH: VERTICAL SLIDE-LATCH FOLDING CHAIR RECEPTACLE TRACKS           )
+( REPOSITORY FILENAME: src/chair_hinges.nc                                     )
+( STRUCTURAL COMPLIANCE: 0.062" MAXIMUM SKELETON WALL RATIO CEILING           )
+( OPERATION PROTOCOL: HIGH-FEED INTERPOLATION ON TI-6AL-4V TITANIUM SKELTON    )
+( ============================================================================ )
+
+G20 ( Enforce Inch Measurement Units Mode )
+G90 G94 G17 ( Absolute Coordinates, Feed per Minute Mode, XY Machining Plane Selection )
+G00 Z3.0 ( Rapid Traverse Clearance Z Lift to Safe Machine Clearance Height Plane )
+
+( --- CNC MACHINE TOOL DEFINITION BLOCK --- )
+( TOOL 11: 0.1875" THREE-FLUTE COATED CARBIDE HIGH-PERFORMANCE SLOTTING MILL   )
+T11 M06 ( Execute Automated Mechanical Tool Change Sequence )
+S2600 M03 ( Engage Spindle Drive: 2600 RPM Clockwise Rotational Direction )
+M08 ( Engage High-Pressure Water-Soluble Flood Coolant System Pump Line Flow )
+
+( ============================================================================ )
+( ROUTING CHAIR TRACK POCKETS: PILOT AND CO-PILOT SYMMETRIC FRAMING BOUNDARIES )
+( ============================================================================ )
+G00 X16.500 Y39.000 ( Rapid Drive to Left-Seat Core Frame Anchor Center Line )
+G00 Z0.100 ( Rapid Vertical Approach Drop to Safe Material Approach Plane )
+
+G01 Z-0.062 F10.0 ( Plunge Cutter to Maximum Regulated Framework Depth Baseline )
+G01 Z-24.000 F5.5 ( Carve a 24-Inch Vertical Sliding Slot Down the Frame Rib )
+G00 Z3.000 ( Lift Clear of Left Channel )
+
+G00 X-16.500 Y39.000 ( Rapid Cross-Over Travel to Right-Seat Mirror Slot Target )
+G00 Z0.100 ( Rapid Vertical Approach Drop to Safe Material Approach Plane )
+G01 Z-0.062 F10.0 ( Engage Mill to Framing Level )
+G01 Z-24.000 F5.5 ( Carve Mirror 24-Inch Vertical Sliding Slot Down the Frame Rib )
+
+( --- SYSTEM SHUTDOWN TERMINATION RUN CLEANUP --- )
+M09 ( Disengage High-Pressure Coolant Flow Streams )
+G00 Z3.000 M05 ( Rapid Height Extraction Z-Lift / Spindle Drive Motor Stop )
+G28 G90 X0 Y0 Z0 ( Force Complete Gantry Return Loop back To Home Reference Ground Zero )
+M30 ( Complete Memory Program End and Auto-Rewind Control File Index Loop )
