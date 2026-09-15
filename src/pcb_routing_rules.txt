@@ -1,0 +1,25 @@
+[Board_Design_Rules]
+; ============================================================================
+; CONFIGURATION: TITAN-GEMINI-XVI MASTER PCB ROUTING CONSTRAINT FILE
+; ARCHITECTURE: NATIVE 16-STATE HIGH-FREQUENCY ANALOG BUS MATRIX
+; COMPLIANCE: ZERO FASTENERS / 2OZ HEAVY COPPER HIGH-VIBRATION STANDARD
+; ============================================================================
+
+; --- TRACE DIMENSION CONSTRAINTS ---
+Nominal_Trace_Width_Inches   = 0.0250  ; Sized for 2oz heavy copper layers to prevent Joule heating
+Minimum_Trace_Clearance_Inches = 0.0300  ; Enforces structural isolation between analog voltage levels
+Trace_Thickness_2oz_Copper   = 0.0028  ; Standard thickness for high-current survivability
+
+; --- GEOMETRIC ROUTING RESTRICTIONS ---
+Allow_90_Degree_Corners     = False   ; STRICTLY FORBIDDEN. Causes high-frequency signal reflections
+Enforced_Trace_Corner_Angle = 45.0    ; All trace wraps must execute via smooth 45-degree angle shifts
+Minimum_Corner_Fillet_Radius = 0.0150  ; Smooths trace junctions to eliminate localized impedance spikes
+
+; --- SHIELDING & ELECTROMAGNETIC ISOLATION ---
+Deploy_Concentric_Guard_Rings = True   ; Continuous 2oz copper guard traces surrounding analog signal paths
+Guard_Ring_Width_Inches       = 0.0200  ; Robust trace width for grounding loops
+Guard_Ring_Clearance_Inches   = 0.0250  ; Uniform air-gap clearance around critical lines
+
+; --- MECHANICAL VIA SPECIFICATIONS ---
+Minimum_MicroVia_Hole_Diameter = 0.0120 ; High-density layered interconnect minimum
+Minimum_Via_Annular_Ring_Width = 0.0080 ; Prevents pad tear-out under high-G thermal contraction profiles
